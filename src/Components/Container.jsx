@@ -1,23 +1,30 @@
 import AddToDo from "./AddTodo"
 import TodoList from "./TodoList"
 import style from './Container.module.css'
+import { useState } from "react"
+import EmptyMsg from "./EmptyMsg"
 
 const Container = () => {
-  let todoList = [
+  let [todoList, setTodo] = useState([]);
+
+  const addNewItem = (a, b, uuid) => {
+    let list = [...todoList, {'name' : a, 'dueDate' : b, 'id' : uuid}]
+    setTodo(list);
+  }
+
+  const deleteItem = (id) => {
+    let newList = todoList.filter(item => item.id !== id);
+    setTodo(newList);
+  }
+
+  return <div className={style.container}>
+    <AddToDo addNewItem={addNewItem}/>
     {
-      name : "Visit Pashupati",
-      dueDate : "15/12/2025",
-    },
-    {
-      name : "Go to theatre to Watch Avatar",
-      dueDate : "16/12/2025",
-    },
-  ];
-  
-    return <div className={style.container}>
-      <AddToDo />
-      <TodoList todoList={todoList}/>
-      </div>
+    todoList.length === 0 ? 
+    <EmptyMsg /> :
+    <TodoList todoList={todoList} handleDeleteButton={deleteItem}/>
+    }
+  </div>
 }
 
 export default Container
