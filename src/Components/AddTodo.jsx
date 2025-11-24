@@ -1,29 +1,21 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import style from './AddTodo.module.css'
 import {v4 as uuidv4} from 'uuid'
 
 function AddToDo({addNewItem}) {
   const today = new Date().toISOString().split("T")[0];
-  let [name, setName] = useState('');
-  let [dueDate, setDueDate] = useState(today);
-  // let [error, setError] = useState('');
-
-  function handleNameChange(event) {
-    setName(event.target.value);
-  }
-
-  function handleDateChange(event) {
-    setDueDate(event.target.value)
-  }
+  let todoNameEle = useRef('');
+  let todoDueDateEle = useRef(today);
 
   const handleAddButtonClicked = () => {
-    if(!name.trim()) {
-      // setError('Please fill the todo name');
+    const todoName = todoNameEle.current.value;
+    const todoDueDate = todoDueDateEle.current.value;
+    if(!todoName.trim() || !todoDueDate) {
       return;
     }
-    addNewItem(name, dueDate, uuidv4());
-    setName('');
-    setDueDate(today);
+    addNewItem(todoName, todoDueDate, uuidv4());
+    todoNameEle.current.value = '';
+    todoDueDateEle.current.value = today;
   }
 
   const handleKeyDown = (event) => {
@@ -36,8 +28,7 @@ function AddToDo({addNewItem}) {
         <input 
         type="text" 
         placeholder="Enter todo-list"
-        value={name}
-        onChange={(event) => handleNameChange(event)}
+        ref={todoNameEle}
         onKeyDown={handleKeyDown}
         />
       </div>
@@ -46,8 +37,9 @@ function AddToDo({addNewItem}) {
           type="date" 
           name="todo-date"
           min={today}
-          value={dueDate}
-          onChange={(event) => handleDateChange(event)}
+          ref={todoDueDateEle}
+          defaultValue={today}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className="col-2">

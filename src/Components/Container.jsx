@@ -8,8 +8,7 @@ const Container = () => {
   let [todoList, setTodo] = useState([]);
 
   const addNewItem = (a, b, uuid) => {
-    let list = [...todoList, {'name' : a, 'dueDate' : b, 'id' : uuid}]
-    setTodo(list);
+    setTodo((prev) => [...prev, {'name' : a, 'dueDate' : b, 'id' : uuid}]);
   }
 
   const deleteItem = (id) => {

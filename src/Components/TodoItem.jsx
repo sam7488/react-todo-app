@@ -1,4 +1,5 @@
 import style from './TodoItem.module.css'
+import { MdDelete } from "react-icons/md";
 
 const TodoItem = ({item, handleDeleteButton}) => {
   return <div className={style.item}>
@@ -11,8 +12,11 @@ const TodoItem = ({item, handleDeleteButton}) => {
         className="btn btn-danger"
         onClick={() => handleDeleteButton(item.id)}
         >
-          Delete
+          {/* Delete */}
+          <MdDelete className={style.deleteIcom}/>
         </button>
+        
+
       </div>
     </div>
   </div>
