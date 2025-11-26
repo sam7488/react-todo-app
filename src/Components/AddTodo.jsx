@@ -1,11 +1,13 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import style from './AddTodo.module.css'
 import {v4 as uuidv4} from 'uuid'
+import { ContextTodoItems } from '../../store/todo-items-store';
 
-function AddToDo({addNewItem}) {
+function AddToDo() {
   const today = new Date().toISOString().split("T")[0];
   let todoNameEle = useRef('');
   let todoDueDateEle = useRef(today);
+  const {addNewItem} = useContext(ContextTodoItems);
 
   const handleAddButtonClicked = () => {
     const todoName = todoNameEle.current.value;
