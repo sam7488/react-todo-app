@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ContextTodoItems } from "../../store/todo-items-store";
+import { ContextTodoItems } from "../store/todo-items-store";
 
 function EmptyMsg() {
   const {todoItems} = useContext(ContextTodoItems);

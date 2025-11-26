@@ -1,4 +1,4 @@
-import style from './AppName.module.css';
+import style from '../css/AppName.module.css';
 
 function AppName() {
   return <h1 className={style.header}>

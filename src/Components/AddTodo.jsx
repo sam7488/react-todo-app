@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react';
-import style from './AddTodo.module.css'
+import style from '../css/AddTodo.module.css'
 import {v4 as uuidv4} from 'uuid'
-import { ContextTodoItems } from '../../store/todo-items-store';
+import { ContextTodoItems } from '../store/todo-items-store';
 
 function AddToDo() {
   const today = new Date().toISOString().split("T")[0];
